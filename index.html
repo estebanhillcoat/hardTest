@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <button onclick="evaluaPc()">Evaluá tu PC</button>
+
+    <h3 id="dos"></h3>
+
+    <p style="display: none" id="parrafo">
+      Tu compu puede ejecutar Unity, descargalo desde
+      <a href="https://public-cdn.cloud.unity3d.com/hub/prod/UnityHubSetup.exe"
+        >acá</a
+      >
+    </p>
+    <p id="ram"></p>
+
+    <script>
+      let evaluaPc = () => {
+        document.getElementById("dos").style.display = "hidden";
+        let ram = navigator.deviceMemory;
+        let sistema = navigator.userAgentData;
+        let agent = navigator.userAgent;
+
+        // testeo de sistema operativo
+
+        if (agent.search("x64") == -1) {
+          document.getElementById("dos").innerHTML =
+            "Tu compu no tiene un sistema operativo de 64bits y por eso NO puede ejecutar unity";
+        } else {
+          document.getElementById("parrafo").style.display = "block";
+        }
+
+        // testeo de ram
+
+        if (ram < 4) {
+          alert(
+            "ADVERTENCIA: tu compu tiene " +
+              ram +
+              "gb de Ram por lo que Unity puede ejecutarse muy lento"
+          );
+        }
+        document.getElementById("ram").innerHTML =
+          " Tenes " + ram + "gb de memoria en tu compu.";
+      };
+    </script>
+  </body>
+</html>
